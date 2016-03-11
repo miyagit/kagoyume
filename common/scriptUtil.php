@@ -72,9 +72,10 @@ function get_gvalue($name){
  */
 
 function session_check() {
-
-	session_unset ();
-	echo '<meta http-equiv="refresh" content="0;URL=' . TOP . '">';
+	if (isset ( $_POST ['mode'] ) && $_POST ['mode'] == "Logout") {
+		session_unset ();
+		echo '<meta http-equiv="refresh" content="0;URL=' . TOP . '">';
+	}
 }
 
 function session_clear(){
@@ -88,4 +89,29 @@ function session_clear(){
 
     // 最終的に、セッションを破壊する
     session_destroy();
+}
+
+
+function Kaiin () {
+
+
+	 if (isset($_SESSION["loginseikou"]) && $_SESSION["loginseikou"] == 'loginseikou') {?>
+	        	ようこそ<a href="<?php echo MY_DATA ?>"><?php echo $_SESSION["name"]; ?> </a>さん
+		<a href="<?php echo CART ?>">買い物かごへ</a>
+		<br>
+		<br>
+		<form action=<?php echo TOP?> method="POST">
+			<input type="submit" name="Logout" value="ログアウト" style="width: 100px">
+			<input type="hidden" name="mode" value="Logout">
+		</form>
+	        <?php
+									} else {
+										?>
+	        <form action="login.php" method="POST">
+			<input type="submit" name="Login" value="ログイン" style="width: 100px">
+
+		</form>
+	        <?php
+									}
+
 }

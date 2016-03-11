@@ -1,11 +1,10 @@
 <?php
 require_once '../common/defineUtil.php';
 require_once ("../sample1/common/common.php"); // 共通ファイル読み込み(使用する前に、appidを指定してください。)
+require_once '../common/scriptUtil.php';
 session_start ();
-if (isset ( $_POST ['mode'] ) && $_POST ['mode'] == "Logout") {
-	session_unset ();
-	echo '<meta http-equiv="refresh" content="0;URL=' . LOGIN . '">';
-}
+session_check();
+
 ?>
 <html>
 <head>
@@ -14,23 +13,9 @@ if (isset ( $_POST ['mode'] ) && $_POST ['mode'] == "Logout") {
 <link rel="stylesheet" type="text/css" href="../css/prototype.css" />
 </head>
 <body>
-        <?php if (isset($_SESSION["loginseikou"]) && $_SESSION["loginseikou"] == 'loginseikou') {?>
-        	ようこそ<a href="<?php echo MY_DATA ?>"><?php echo $_SESSION["name"]; ?> </a>さん
-	<a href="<?php echo CART ?>">買い物かごへ</a>
-	<br>
-	<br>
-	<form action="top.php" method="POST">
-		<input type="submit" name="Logout" value="ログアウト" style="width: 100px">
-		<input type="hidden" name="mode" value="Logout">
-	</form>
-        <?php
-								} else {
-									?>
-          <form action="login.php" method="POST">
-		<input type="submit" name="Login" value="ログイン" style="width: 100px">
-	</form>
-        <?php
-								}
+<?php
+Kaiin ();
+
 
 								$tokutei = $_GET ['id'];
 
@@ -61,6 +46,5 @@ if (isset ( $_POST ['mode'] ) && $_POST ['mode'] == "Logout") {
 	</form>
 	</div>
 
-	<h1>
-		<a href="<?php echo TOP ?> ">TOPページへ</a>
-	</h1>
+
+		<h2><?php echo return_top();?></h2>

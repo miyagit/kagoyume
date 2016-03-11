@@ -22,10 +22,8 @@ require_once ("../sample1/common/common.php"); // 共通ファイル読み込み
  */
 
 session_start ();
-if (isset ( $_POST ['mode'] ) && $_POST ['mode'] == "Logout") {
-	session_unset ();
-	echo '<meta http-equiv="refresh" content="0;URL=' . LOGIN . '">';
-}
+session_check();
+
 
 $hits = array ();
 // [自分理解]name属性queryに値が入っているならば$_GET["query"]を表示、そうでないならば、""を表示
@@ -54,25 +52,9 @@ if ($query != "") {
 <link rel="stylesheet" type="text/css" href="../css/prototype.css" />
 </head>
 <body>
-        <?php if (isset($_SESSION["loginseikou"]) && $_SESSION["loginseikou"] == 'loginseikou') {?>
-        	ようこそ<a href="<?php echo MY_DATA ?>"><?php echo $_SESSION["name"]; ?></a>さん
-	<a href="<?php echo CART ?>">買い物かごへ</a>
-	<br>
-	<br>
-	<form action="<?php echo TOP ?>" method="POST">
-		<input type="submit" name="Logout" value="ログアウト" style="width: 100px">
-
-		<input type="hidden" name="mode" value="Logout">
-	</form>
-        <?php
-								} else {
-									?>
-          <form action="login.php" method="POST">
-		<input type="submit" name="Login" value="ログイン" style="width: 100px">
-	</form>
-        <?php
-								}
-								?>
+<?php
+Kaiin ();
+?>
         <h1>
 		ショッピングデモサイト - 商品の表示</a>
 	</h1>
